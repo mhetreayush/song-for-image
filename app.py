@@ -174,7 +174,12 @@ def display_results(results):
     st.subheader("Matching Songs")
     for i, match in enumerate(results['matches'], 1):
         with st.expander(f"Match {i} (Score: {match.score:.4f})"):
-            st.json(match.metadata)
+            st.json({
+                "google-search": match.metadata['song'] + " by " + match.metadata['artist'],
+                "song": match.metadata['song'],
+                "artist": match.metadata['artist'],
+                "link": match.metadata['link'],
+            })
 
 if __name__ == "__main__":
     main()

@@ -68,7 +68,7 @@ class ImageSearchApp:
             
             # use ollama
             # Define the endpoint and payload
-            url = "http://localhost:11434/api/embeddings"
+            url = "20.244.47.121:11434/api/embeddings"
             payload = {
                 "model": "nomic-embed-text",
                 "prompt": text

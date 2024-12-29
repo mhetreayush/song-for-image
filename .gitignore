@@ -1,3 +1,6 @@
 # Ignore Python virtual environments
 venv/
 *.venv/
+.env
+*.pem
+test.txt

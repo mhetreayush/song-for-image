@@ -15,6 +15,8 @@ client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
 pinecone = Pinecone(api_key=os.getenv('PINECONE_API_KEY'))
 
+OLLAMA_HOSTED_VM_PUBLIC_IP = os.getenv("OLLAMA_HOSTED_VM_PUBLIC_IP")
+
 class ImageSearchApp:
     def __init__(self):
         self.index = pinecone.Index('songs')
@@ -68,7 +70,7 @@ class ImageSearchApp:
             
             # use ollama
             # Define the endpoint and payload
-            url = "http://20.244.47.121:11434/api/embeddings"
+            url = f"http://{OLLAMA_HOSTED_VM_PUBLIC_IP}/api/embeddings"
             payload = {
                 "model": "nomic-embed-text",
                 "prompt": text
@@ -79,12 +81,6 @@ class ImageSearchApp:
             print(response.json())
             return response.json()['embedding']
             
-            # response = client.embeddings.create(input=text, model="text-embedding-3-large", dimensions=768)
-            # # Parse the response
-            # embedding_data = response.data[0].embedding
-            # print("Embedding:", embedding_data)
-    
-            # return embedding_data
             
         except Exception as e:
             raise Exception(f"Error generating embedding: {str(e)}")
